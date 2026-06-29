@@ -8,6 +8,7 @@ threat (a cheap real smoke test).
 from __future__ import annotations
 
 import argparse
+import sys
 
 from . import changelog, client, frontend, models, schema, store
 from .layers import cleanup, generate, optimize, verify
@@ -41,6 +42,12 @@ def _assert_generate_unsourced(proposals: list[dict]) -> None:
 def run(dry_run: bool = False, only_slug: str | None = None) -> dict:
     run_id = models.new_run_id()
     client_obj = client.build_client(dry_run=dry_run)
+    if not dry_run and client.is_dry_run(client_obj):
+        print(
+            "WARNING: ANTHROPIC_API_KEY is unset — using the deterministic DryRunClient. "
+            "Any records written are FIXTURES, not real verifications.",
+            file=sys.stderr,
+        )
     records = store.load_all()
     index = models.index_of(list(records.values()))
 
