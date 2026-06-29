@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>End Times Tracker</title>
+  <meta name="description" content="A fact-based tracker of possible threats to humanity. An aggregation of authoritative figures, not a forecast." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>End&nbsp;Times&nbsp;Tracker</h1>
+    <p class="tagline">A fact-based aggregation of possible threats to humanity — every published figure is grounded in an authoritative source. <strong>This is an aggregation of published figures, not a forecast.</strong></p>
+    <p class="freshness" id="freshness"></p>
+  </header>
+
+  <main id="app">
+    <p class="loading">Loading threats…</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>Every claim links its source. <span class="badge badge-verified">verified</span> claims are grounded on an authoritative allowlisted domain; threats that fail verification appear under <span class="badge badge-review">under review</span> and are never presented as confirmed.</p>
+    <p>Open source. The dataset is rebuilt and re-published on every pipeline run.</p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
