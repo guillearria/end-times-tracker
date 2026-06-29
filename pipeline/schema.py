@@ -30,6 +30,32 @@ def _validator() -> jsonschema.Draft202012Validator:
     return jsonschema.Draft202012Validator(schema)
 
 
+def _bare_schema() -> dict:
+    """The threat schema with metadata keys stripped, usable as a structured-output schema."""
+    s = dict(load_schema())
+    for k in ("$schema", "$id", "title", "description"):
+        s.pop(k, None)
+    return s
+
+
+def output_format() -> dict:
+    """A single-record `output_config.format` value."""
+    return {"type": "json_schema", "schema": _bare_schema()}
+
+
+def array_output_format(key: str) -> dict:
+    """An `output_config.format` wrapping a list of records under `key` (for Generate)."""
+    return {
+        "type": "json_schema",
+        "schema": {
+            "type": "object",
+            "additionalProperties": False,
+            "required": [key],
+            "properties": {key: {"type": "array", "items": _bare_schema()}},
+        },
+    }
+
+
 def validate(record: dict) -> None:
     """Validate a record. Raises ValidationError with all problems joined."""
     msgs = [

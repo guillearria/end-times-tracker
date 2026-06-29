@@ -8,6 +8,7 @@ take a deterministic local path, exercising the full orchestration for $0.
 
 from __future__ import annotations
 
+import json
 import os
 
 from . import config
@@ -65,3 +66,11 @@ def call_layer(client, *, model, system, user_content, effort=None, fmt=None, to
     if tools:
         kwargs["tools"] = tools
     return client.messages.create(**kwargs)
+
+
+def first_json(resp) -> dict:
+    """Parse the first text block of a structured-output response as JSON."""
+    for block in getattr(resp, "content", []):
+        if getattr(block, "type", None) == "text":
+            return json.loads(block.text)
+    raise ValueError("response contained no text block to parse")

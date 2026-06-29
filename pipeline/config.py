@@ -14,6 +14,7 @@ DATA_DIR = ROOT / "data"
 THREATS_DIR = DATA_DIR / "threats"
 QUARANTINE_DIR = DATA_DIR / "quarantine"
 SCHEMA_PATH = DATA_DIR / "schema" / "threat.schema.json"
+PROMPTS_DIR = ROOT / "pipeline" / "prompts"
 FRONTEND_DATA = ROOT / "frontend" / "data" / "threats.json"
 CHANGELOG_PATH = ROOT / "CHANGELOG.md"
 FIXTURES_DIR = ROOT / "tests" / "fixtures"
@@ -81,6 +82,11 @@ SOURCE_ALLOWLIST: dict[str, str] = {
 # Severity / probability -> integer rank, used by the Optimize layer.
 SEVERITY_RANK = {"regional": 1, "continental": 2, "civilizational": 3, "extinction": 4}
 PROBABILITY_RANK = {"very-low": 1, "low": 2, "medium": 3, "high": 4, "very-high": 5}
+
+
+def load_prompt(name: str) -> str:
+    """Read a system prompt by stem, e.g. load_prompt("generate")."""
+    return (PROMPTS_DIR / f"{name}.system.md").read_text(encoding="utf-8")
 
 
 def allowlisted(url: str) -> tuple[bool, str | None]:
