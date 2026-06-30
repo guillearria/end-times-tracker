@@ -22,11 +22,30 @@ The pipeline runs four **independent** model calls that share no context. Each h
 - **Optimize** may rewrite presentation text and compute `sort_keys`, but **must not** touch
   `claims` text or `source_url`s. A guard asserts claims are byte-identical pre/post and reverts drift.
 
+## Curating with Claude Code (no API spend)
+
+The primary way to refresh the dataset is **Claude Code on a Claude Max subscription** — it spends
+no Anthropic API credits. In a Claude Code session run:
+
+```
+/refresh-threats <optional list of threats>
+```
+
+It researches each threat with web search, drafts cited claims, runs them through the deterministic
+gate, rebuilds the frontend, and opens a PR. See [`.claude/commands/refresh-threats.md`](.claude/commands/refresh-threats.md).
+
 ## Adding a threat by hand
 
-1. Write `data/threats/<slug>.json` (slug matches `^[a-z0-9-]+$` and the filename).
-2. Run `python scripts/validate_data.py` — it must exit 0.
-3. Open a PR. CI re-runs schema validation + tests + the frontend build.
+Draft `data/threats/<slug>.json` minus the computed fields (`verification`, `sort_keys`,
+`provenance`, `last_updated`) and finalize it through the same deterministic gate the pipeline uses —
+the allowlist decides verified vs quarantined, not you:
+
+1. Write the draft (slug matches `^[a-z0-9-]+$` and the filename), with each claim citing a real
+   `source_url` on an allowlisted domain (see `SOURCE_ALLOWLIST` in `pipeline/config.py`).
+2. Run `python scripts/author_threat.py draft.json` — it applies the gate, computes `sort_keys`,
+   stamps provenance, validates, and writes to `data/threats/` (or `data/quarantine/`).
+3. Run `python scripts/validate_data.py` (must exit 0) and `python scripts/build_frontend.py`.
+4. Open a PR. CI re-runs schema validation + tests + the frontend build.
 
 ## The source allowlist
 

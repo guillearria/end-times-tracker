@@ -7,8 +7,15 @@ It is explicitly **an aggregation of authoritative figures, not a forecast.**
 
 ## How it works
 
-A four-stage pipeline of **independent** Claude calls (no shared context between stages) refreshes
-the dataset and commits it back to the repo:
+The dataset is curated by **Claude Code running on a Claude Max subscription** (no per-token API
+spend): it researches threats with web search, drafts cited claims, and runs each record through the
+project's deterministic Python trust gate, which decides what publishes. Updates land via a
+human-reviewed PR — see the `/refresh-threats` command and `scripts/author_threat.py`. The site
+redeploys automatically on merge.
+
+A four-stage pipeline of **independent** Claude *API* calls (Generate → Verify → Clean-up → Optimize)
+also exists as an **optional, manual path** (`python -m pipeline.run`); it spends API credits and is
+no longer run on a schedule. Either way the same gate enforces the trust model. The four stages:
 
 1. **Generate** (Opus) proposes candidate threats and claims — everything it emits is `unverified`.
 2. **Verify** (Opus) grounds each claim against authoritative sources via web search, then a
@@ -47,8 +54,19 @@ python scripts/serve_frontend.py        # preview at http://localhost:8000
 python -m pipeline.run --only-slug yellowstone-supervolcano
 ```
 
-The daily run is a GitHub Actions cron (`.github/workflows/pipeline.yml`) that needs
-`ANTHROPIC_API_KEY` in the repo's Actions secrets; it runs the pipeline, validates, and commits the diff.
+Curate without spending API credits — drive Claude Code on your Max plan:
+
+```sh
+# In a Claude Code session: research + verify threats and open a PR ($0 API)
+/refresh-threats nuclear winter, antibiotic resistance
+
+# Or finalize a hand-drafted record through the same deterministic gate:
+python scripts/author_threat.py draft.json
+```
+
+The API pipeline (`.github/workflows/pipeline.yml`) is **manual-only** (`workflow_dispatch`) and
+needs `ANTHROPIC_API_KEY` in the repo's Actions secrets; it spends credits, so the daily cron was
+removed. Re-add a `schedule:` trigger there only if you fund the API.
 
 ## How to read a threat file
 
