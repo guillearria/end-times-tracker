@@ -1,8 +1,10 @@
 name: pipeline
 
+# Manual-only. This optional path runs the paid four-layer model pipeline and SPENDS API CREDITS
+# (needs ANTHROPIC_API_KEY in Actions secrets). The daily cron is intentionally removed — recurring
+# curation now happens via Claude Code on a Max subscription (.claude/commands/refresh-threats.md,
+# scripts/author_threat.py), at $0 API. Re-add a `schedule:` trigger only if you fund the API.
 on:
-  schedule:
-    - cron: "0 6 * * *" # daily 06:00 UTC
   workflow_dispatch: {}
 
 permissions:

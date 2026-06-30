@@ -1,10 +1,14 @@
 # end-times-tracker — Architecture Blueprint
 
-> **Status: design document, ideation phase. No code is built yet.**
-> This document exists to be reviewed and cross-verified (including by another LLM)
-> *before* any implementation begins. Nothing here has been built; the file tree,
-> schema, and code signatures below describe the intended system so the design can
-> be evaluated end-to-end on paper.
+> **Status: implemented, with one operating-model change since this was written.**
+> The system below is built. The original design called for a *fully-automated daily API cron*.
+> In practice that path spends Anthropic **API credits** (a Max/Pro subscription cannot pay for raw
+> API calls), so recurring curation now runs through **Claude Code on a Max subscription** instead:
+> it researches and drafts cited claims with web search, and `scripts/author_threat.py` /
+> `pipeline.curate` run each record through the **same deterministic quarantine gate** described
+> here before a human-reviewed PR. The four-layer API pipeline remains as an optional manual path
+> (`python -m pipeline.run`). **The trust model is unchanged** — the allowlist gate still has the
+> final say regardless of who proposes a claim.
 
 ## 1. What this project is
 
@@ -18,8 +22,10 @@ Core principles:
   source (USGS, WHO, IPCC, NASA/CNEOS, IAEA, CDC, NOAA, UN…) with a citation.
 - **Unverifiable claims are held back, never shown.** Material that fails verification is
   quarantined, not published.
-- **Fully automated, no human in the loop.** The dataset refreshes on a schedule and
-  commits itself back to the repo.
+- **Low-friction curation, human-reviewed.** The dataset is refreshed by Claude Code (Max plan,
+  web search) or the optional API pipeline; either way the deterministic gate decides what
+  publishes, and changes land via PR. *(Originally specified as a fully-automated daily cron — see
+  the status note above for why that path is now optional/manual.)*
 - **Independent model layers.** Four stages — Generate, Verify, Clean-up, Optimize —
   each run as separate model calls that **do not share context**.
 - **Git is the database, the changelog, and the audit trail.** One JSON file per threat;
