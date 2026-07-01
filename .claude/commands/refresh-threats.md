@@ -6,6 +6,9 @@ You are curating the End Times Tracker dataset **on a Claude Max subscription us
 WebSearch/WebFetch tools — no Anthropic API credits are spent.** You replace the paid Generate +
 Verify model layers; the deterministic Python trust gate still runs and has the final say.
 
+**Intended cadence: weekly.** Standing threats are assessment-based (probability × severity) and
+genuinely don't move day to day — see `/refresh-events` for the daily-cadence World Pulse feed.
+
 Target for this run: **$ARGUMENTS**
 (If empty: propose 2–3 well-known threats not yet tracked, favoring categories with thin coverage —
 `technological`, `societal`, `resource` — or refresh the stalest existing records.)
@@ -51,8 +54,10 @@ Target for this run: **$ARGUMENTS**
 5. **Verify locally:**
    ```sh
    python scripts/validate_data.py && python scripts/build_frontend.py && python -m pytest -q
+   python -c "from pipeline import changelog; changelog.regenerate()"
    ```
 
 6. **Open a PR for human review** — factual content is never pushed straight to `main`. Create a
-   branch, commit `data/` + `frontend/data/threats.json`, push, and open a PR summarizing each
-   threat and its sources. On merge, the `pages` workflow redeploys the site automatically.
+   branch, commit `data/` + `frontend/data/threats.json` + `CHANGELOG.md`, push, and open a PR
+   summarizing each threat and its sources. On merge, the `pages` workflow redeploys the site
+   automatically.

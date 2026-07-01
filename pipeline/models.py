@@ -42,8 +42,14 @@ def new_run_id() -> str:
     return f"{utc_now_compact()}-{short_random()}"
 
 
-def index_of(records: list[dict]) -> list[dict]:
-    """Compact index fed to Generate: slug/name/category/summary only.
+def _summary_of(r: dict, kind: str) -> str:
+    if kind == "event":
+        return r.get("event", {}).get("impact", {}).get("summary", "")
+    return r.get("assessment", {}).get("summary", "")
+
+
+def index_of(records: list[dict], kind: str = "threat") -> list[dict]:
+    """Compact index fed to Generate (or a refresh command): slug/name/category/summary only.
 
     Deliberately excludes full claims so Generate cannot anchor on stale, possibly
     hallucinated prior text (ARCHITECTURE.md §5).
@@ -53,7 +59,7 @@ def index_of(records: list[dict]) -> list[dict]:
             "id": r["id"],
             "name": r.get("name", ""),
             "category": r.get("category", ""),
-            "summary": r.get("assessment", {}).get("summary", ""),
+            "summary": _summary_of(r, kind),
         }
         for r in records
     ]

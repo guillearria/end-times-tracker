@@ -44,6 +44,14 @@ function dateOnly(iso) {
   return (iso || "").slice(0, 10);
 }
 
+// Days between an ISO timestamp and now; NaN (falsy checks below) if unparseable.
+function daysSince(iso) {
+  if (!iso) return NaN;
+  const then = Date.parse(iso);
+  if (Number.isNaN(then)) return NaN;
+  return (Date.now() - then) / 86400000;
+}
+
 function linkOut(url, text) {
   return el("a", { href: url, target: "_blank", rel: "noopener noreferrer", text });
 }
@@ -204,7 +212,7 @@ function writeCache(key, data) {
   try { localStorage.setItem(key, JSON.stringify(data)); } catch (_) { /* private mode */ }
 }
 
-async function loadPane({ url, mountId, freshnessId, kind, cacheKey, noun }) {
+async function loadPane({ url, mountId, freshnessId, kind, cacheKey, noun, staleAfterDays }) {
   const mount = document.getElementById(mountId);
   const fresh = document.getElementById(freshnessId);
 
@@ -218,11 +226,23 @@ async function loadPane({ url, mountId, freshnessId, kind, cacheKey, noun }) {
     } else {
       mount.replaceChildren(...nodes);
     }
-    fresh.textContent = data.last_updated
-      ? `${published.length} ${noun}${published.length === 1 ? "" : "s"}` +
-        (underReview.length ? `, ${underReview.length} under review` : "") +
-        ` · latest update ${dateOnly(data.last_updated)}`
-      : "";
+    if (!data.last_updated) {
+      fresh.replaceChildren();
+      return;
+    }
+    const summary = `${published.length} ${noun}${published.length === 1 ? "" : "s"}` +
+      (underReview.length ? `, ${underReview.length} under review` : "") +
+      ` · latest update ${dateOnly(data.last_updated)}`;
+    const age = daysSince(data.last_updated);
+    const stale = Number.isFinite(age) && age > staleAfterDays;
+    const freshNodes = [el("span", { text: summary })];
+    if (stale) {
+      freshNodes.push(el("span", {
+        class: "freshness-stale",
+        text: ` — stale: no refresh in over ${Math.floor(age)} days (expected every ${staleAfterDays})`,
+      }));
+    }
+    fresh.replaceChildren(...freshNodes);
   };
 
   const cached = readCache(cacheKey);
@@ -244,11 +264,11 @@ async function loadPane({ url, mountId, freshnessId, kind, cacheKey, noun }) {
 function main() {
   loadPane({
     url: "./data/events.json", mountId: "pulse", freshnessId: "pulse-freshness",
-    kind: "event", cacheKey: "worldwatch.events", noun: "event",
+    kind: "event", cacheKey: "worldwatch.events", noun: "event", staleAfterDays: 2,
   });
   loadPane({
     url: "./data/threats.json", mountId: "threats", freshnessId: "threats-freshness",
-    kind: "threat", cacheKey: "worldwatch.threats", noun: "tracked threat",
+    kind: "threat", cacheKey: "worldwatch.threats", noun: "tracked threat", staleAfterDays: 10,
   });
 }
 

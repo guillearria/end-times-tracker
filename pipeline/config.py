@@ -91,6 +91,10 @@ SOURCE_ALLOWLIST: dict[str, str] = {
     "aisi.gov.uk": "UK AI Security Institute",  # UK govt AI risk research body
     "oecd.ai": "OECD.AI",  # OECD AI Policy Observatory (intergovernmental)
     "itu.int": "ITU",  # UN specialized agency for ICT / AI standards
+    # World Pulse (event) sourcing — disaster/crisis-specific authoritative feeds
+    "gdacs.org": "GDACS",  # UN/EU-backed Global Disaster Alert and Coordination System
+    "reliefweb.int": "ReliefWeb",  # UN OCHA's humanitarian crisis reporting service
+    "imf.org": "IMF",  # for the "economic" event category, same tier as worldbank.org/oecd.org
 }
 
 # Severity / probability -> integer rank, used by the Optimize layer.
