@@ -10,24 +10,32 @@ from pathlib import Path
 from . import config, models
 
 
-def path_for(slug: str) -> Path:
-    return config.THREATS_DIR / f"{slug}.json"
+def dirs_for(kind: str = "threat") -> tuple[Path, Path]:
+    """(published_dir, quarantine_dir) for a record kind. Threat is the default."""
+    if kind == "event":
+        return config.EVENTS_DIR, config.QUARANTINE_EVENTS_DIR
+    return config.THREATS_DIR, config.QUARANTINE_DIR
 
 
-def quarantine_path_for(slug: str) -> Path:
-    return config.QUARANTINE_DIR / f"{slug}.json"
+def path_for(slug: str, kind: str = "threat") -> Path:
+    return dirs_for(kind)[0] / f"{slug}.json"
+
+
+def quarantine_path_for(slug: str, kind: str = "threat") -> Path:
+    return dirs_for(kind)[1] / f"{slug}.json"
 
 
 def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_all() -> dict[str, dict]:
-    """Map slug -> record for every published threat, sorted by slug."""
+def load_all(kind: str = "threat") -> dict[str, dict]:
+    """Map slug -> record for every published record of a kind, sorted by slug."""
     out: dict[str, dict] = {}
-    if not config.THREATS_DIR.exists():
+    published_dir = dirs_for(kind)[0]
+    if not published_dir.exists():
         return out
-    for p in sorted(config.THREATS_DIR.glob("*.json")):
+    for p in sorted(published_dir.glob("*.json")):
         rec = load(p)
         out[rec["id"]] = rec
     return out
@@ -46,9 +54,9 @@ def write_atomic(path: Path, text: str) -> None:
             os.unlink(tmp)
 
 
-def write_record(record: dict, *, quarantine: bool = False) -> Path:
+def write_record(record: dict, *, quarantine: bool = False, kind: str = "threat") -> Path:
     slug = record["id"]
-    path = quarantine_path_for(slug) if quarantine else path_for(slug)
+    path = quarantine_path_for(slug, kind) if quarantine else path_for(slug, kind)
     write_atomic(path, models.dumps(record))
     return path
 

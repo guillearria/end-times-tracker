@@ -17,23 +17,24 @@ from .layers.optimize import compute_sort_keys
 from .layers.verify import apply_gate
 
 
-def finalize(record: dict, *, run_id: str | None = None) -> dict:
+def finalize(record: dict, *, kind: str = "threat", run_id: str | None = None) -> dict:
     """Run a draft through gate -> sort_keys -> provenance -> schema. Mutates and returns it.
 
-    Reuses `verify.apply_gate` (the allowlist quarantine gate), `optimize.compute_sort_keys`, and
-    `models.stamp_provenance`. Raises `schema.ValidationError` on any invalid field. No API calls.
+    Reuses `verify.apply_gate` (the allowlist quarantine gate — shared by threats and events),
+    `optimize.compute_sort_keys`, and `models.stamp_provenance`. Raises `schema.ValidationError`
+    on any invalid field. No API calls.
     """
     record.setdefault("schema_version", models.SCHEMA_VERSION)
     apply_gate(record)  # sets verification block + normalizes source_name from the allowlist
-    record["sort_keys"] = compute_sort_keys(record)
+    record["sort_keys"] = compute_sort_keys(record, kind)
     models.stamp_provenance(record, layer="verify", run_id=run_id or models.new_run_id())
-    schema.validate(record)
+    schema.validate(record, kind)
     return record
 
 
-def write(record: dict, *, run_id: str | None = None) -> tuple[dict, str, bool]:
-    """Finalize then write to data/threats/ or data/quarantine/ by gate result."""
-    rec = finalize(record, run_id=run_id)
+def write(record: dict, *, kind: str = "threat", run_id: str | None = None) -> tuple[dict, str, bool]:
+    """Finalize then write to the kind's published or quarantine dir by gate result."""
+    rec = finalize(record, kind=kind, run_id=run_id)
     quarantined = rec["verification"]["status"] == "quarantined"
-    path = store.write_record(rec, quarantine=quarantined)
+    path = store.write_record(rec, quarantine=quarantined, kind=kind)
     return rec, str(path), quarantined

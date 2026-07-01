@@ -1,0 +1,201 @@
+{
+  "last_updated": "2026-07-01T15:55:57Z",
+  "published": [
+    {
+      "category": "outbreak",
+      "claims": [
+        {
+          "id": "claim-1",
+          "retrieved_date": "2026-07-01",
+          "source_name": "WHO",
+          "source_url": "https://www.who.int/news/item/17-05-2026-epidemic-of-ebola-disease-in-the-democratic-republic-of-the-congo-and-uganda-determined-a-public-health-emergency-of-international-concern",
+          "text": "On 17 May 2026 the WHO Director-General determined that the epidemic of Ebola disease caused by Bundibugyo virus in the DRC and Uganda constitutes a Public Health Emergency of International Concern (PHEIC).",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-2",
+          "retrieved_date": "2026-07-01",
+          "source_name": "WHO",
+          "source_url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON608",
+          "text": "As of 17 June 2026, the Democratic Republic of the Congo had reported 896 confirmed cases of Bundibugyo virus disease including 232 deaths.",
+          "verification_status": "verified"
+        }
+      ],
+      "description": "The Democratic Republic of the Congo declared its 17th Ebola outbreak — caused by Bundibugyo virus — on 15 May 2026, centred in Ituri Province. On 17 May 2026 the WHO Director-General declared the DRC and Uganda epidemic a Public Health Emergency of International Concern (PHEIC).",
+      "event": {
+        "impact": {
+          "deaths": 234,
+          "displaced": null,
+          "summary": "As of 17 June 2026 the DRC had reported 896 confirmed cases including 232 deaths; Uganda reported 19 confirmed cases and two deaths (as of 18 June 2026), with no new cases there since 5 June 2026."
+        },
+        "live_source_url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
+        "location": {
+          "country": "Democratic Republic of the Congo",
+          "lat": null,
+          "lon": null,
+          "region": "Ituri Province (Mongbwalu), DRC, with cases in Uganda"
+        },
+        "magnitude": null,
+        "occurrence_date": "2026-05-15",
+        "scale": "PHEIC",
+        "status": "ongoing"
+      },
+      "id": "ebola-bundibugyo-drc-2026",
+      "last_updated": "2026-07-01T15:55:57Z",
+      "name": "Ebola (Bundibugyo virus) — DR Congo & Uganda",
+      "provenance": {
+        "history": [
+          {
+            "at": "2026-07-01T15:55:57Z",
+            "layer": "verify",
+            "run_id": "2026-07-01T15-55-57Z-c7dd3c"
+          }
+        ],
+        "last_layer": "verify",
+        "last_run_id": "2026-07-01T15-55-57Z-c7dd3c"
+      },
+      "schema_version": "1.0",
+      "sort_keys": {
+        "composite": 7397513.0,
+        "impact_rank": 3,
+        "recency_rank": 739751
+      },
+      "verification": {
+        "confidence": "high",
+        "notes": "gate: 2 verified, 0 disputed, 0 unverified -> verified",
+        "status": "verified"
+      }
+    },
+    {
+      "category": "humanitarian",
+      "claims": [
+        {
+          "id": "claim-1",
+          "retrieved_date": "2026-07-01",
+          "source_name": "UNHCR",
+          "source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+          "text": "As of December 2025, some 14 million people had been forced to flee their homes since the conflict erupted in Sudan in April 2023.",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-2",
+          "retrieved_date": "2026-07-01",
+          "source_name": "UNHCR",
+          "source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+          "text": "UNHCR describes the Sudan situation as the world's largest displacement, humanitarian and protection crisis.",
+          "verification_status": "verified"
+        }
+      ],
+      "description": "The conflict that erupted in Sudan in April 2023 between the Sudanese Armed Forces and the Rapid Support Forces has produced what UNHCR calls the world's largest displacement crisis, forcing millions from their homes inside Sudan and into neighbouring countries.",
+      "event": {
+        "impact": {
+          "deaths": null,
+          "displaced": 14000000,
+          "summary": "As of December 2025, UNHCR reported that some 14 million people had been forced to flee their homes since the conflict began. UNHCR's 2026 planning covers 15.3 million forcibly displaced people and returnees."
+        },
+        "live_source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+        "location": {
+          "country": "Sudan",
+          "lat": null,
+          "lon": null,
+          "region": "Sudan nationwide and neighbouring countries"
+        },
+        "magnitude": null,
+        "occurrence_date": "2023-04-15",
+        "scale": "~14M forced to flee",
+        "status": "ongoing"
+      },
+      "id": "sudan-displacement-crisis",
+      "last_updated": "2026-07-01T15:55:57Z",
+      "name": "Sudan Displacement Crisis",
+      "provenance": {
+        "history": [
+          {
+            "at": "2026-07-01T15:55:57Z",
+            "layer": "verify",
+            "run_id": "2026-07-01T15-55-57Z-d920d6"
+          }
+        ],
+        "last_layer": "verify",
+        "last_run_id": "2026-07-01T15-55-57Z-d920d6"
+      },
+      "schema_version": "1.0",
+      "sort_keys": {
+        "composite": 7386254.0,
+        "impact_rank": 4,
+        "recency_rank": 738625
+      },
+      "verification": {
+        "confidence": "high",
+        "notes": "gate: 2 verified, 0 disputed, 0 unverified -> verified",
+        "status": "verified"
+      }
+    },
+    {
+      "category": "earthquake",
+      "claims": [
+        {
+          "id": "claim-1",
+          "retrieved_date": "2026-07-01",
+          "source_name": "USGS",
+          "source_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zp/executive",
+          "text": "On 25 June 2026 a magnitude 7.5 earthquake struck 16 km SW of Moron in northern Venezuela, west of Caracas.",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-2",
+          "retrieved_date": "2026-07-01",
+          "source_name": "USGS",
+          "source_url": "https://www.usgs.gov/programs/landslide-hazards/science/2026-venezuela-sequence-earthquake-triggered-landslide-hazards",
+          "text": "The USGS is assessing earthquake-triggered landslide hazards generated by the 2026 Venezuela earthquake sequence.",
+          "verification_status": "verified"
+        }
+      ],
+      "description": "A magnitude 7.5 earthquake struck northern Venezuela west of Caracas on 25 June 2026, 39 seconds after a magnitude 7.2 foreshock in the same sequence. The USGS assessed that high casualties and widespread damage are probable and is tracking aftershocks and earthquake-triggered landslide hazards.",
+      "event": {
+        "impact": {
+          "deaths": null,
+          "displaced": null,
+          "summary": "USGS assessed high casualties and widespread damage as probable. Confirmed casualty figures are still being established; the USGS event page carries the running assessment and aftershock sequence."
+        },
+        "live_source_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zp/executive",
+        "location": {
+          "country": "Venezuela",
+          "lat": null,
+          "lon": null,
+          "region": "Near Morón / San Felipe, northern Venezuela (west of Caracas)"
+        },
+        "magnitude": 7.5,
+        "occurrence_date": "2026-06-25",
+        "scale": "M7.5",
+        "status": "ongoing"
+      },
+      "id": "venezuela-earthquake-2026",
+      "last_updated": "2026-07-01T15:55:57Z",
+      "name": "Venezuela M7.5 Earthquake Doublet",
+      "provenance": {
+        "history": [
+          {
+            "at": "2026-07-01T15:55:57Z",
+            "layer": "verify",
+            "run_id": "2026-07-01T15-55-57Z-0aebbb"
+          }
+        ],
+        "last_layer": "verify",
+        "last_run_id": "2026-07-01T15-55-57Z-0aebbb"
+      },
+      "schema_version": "1.0",
+      "sort_keys": {
+        "composite": 7397921.0,
+        "impact_rank": 1,
+        "recency_rank": 739792
+      },
+      "verification": {
+        "confidence": "high",
+        "notes": "gate: 2 verified, 0 disputed, 0 unverified -> verified",
+        "status": "verified"
+      }
+    }
+  ],
+  "under_review": []
+}

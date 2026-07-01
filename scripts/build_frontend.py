@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Aggregate data/threats/ and data/quarantine/ into frontend/data/threats.json."""
+"""Aggregate threats and World Pulse events into frontend/data/{threats,events}.json."""
 
 from pipeline import frontend
 
 
 def main() -> None:
-    doc = frontend.build()
+    threats = frontend.build()
+    events = frontend.build_events()
     print(
         f"built frontend/data/threats.json — "
-        f"{len(doc['published'])} published, {len(doc['under_review'])} under review"
+        f"{len(threats['published'])} published, {len(threats['under_review'])} under review\n"
+        f"built frontend/data/events.json — "
+        f"{len(events['published'])} published, {len(events['under_review'])} under review"
     )
 
 

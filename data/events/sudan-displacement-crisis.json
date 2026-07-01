@@ -1,0 +1,65 @@
+{
+  "category": "humanitarian",
+  "claims": [
+    {
+      "id": "claim-1",
+      "retrieved_date": "2026-07-01",
+      "source_name": "UNHCR",
+      "source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+      "text": "As of December 2025, some 14 million people had been forced to flee their homes since the conflict erupted in Sudan in April 2023.",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-2",
+      "retrieved_date": "2026-07-01",
+      "source_name": "UNHCR",
+      "source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+      "text": "UNHCR describes the Sudan situation as the world's largest displacement, humanitarian and protection crisis.",
+      "verification_status": "verified"
+    }
+  ],
+  "description": "The conflict that erupted in Sudan in April 2023 between the Sudanese Armed Forces and the Rapid Support Forces has produced what UNHCR calls the world's largest displacement crisis, forcing millions from their homes inside Sudan and into neighbouring countries.",
+  "event": {
+    "impact": {
+      "deaths": null,
+      "displaced": 14000000,
+      "summary": "As of December 2025, UNHCR reported that some 14 million people had been forced to flee their homes since the conflict began. UNHCR's 2026 planning covers 15.3 million forcibly displaced people and returnees."
+    },
+    "live_source_url": "https://www.unhcr.org/us/emergencies/sudan-emergency",
+    "location": {
+      "country": "Sudan",
+      "lat": null,
+      "lon": null,
+      "region": "Sudan nationwide and neighbouring countries"
+    },
+    "magnitude": null,
+    "occurrence_date": "2023-04-15",
+    "scale": "~14M forced to flee",
+    "status": "ongoing"
+  },
+  "id": "sudan-displacement-crisis",
+  "last_updated": "2026-07-01T15:55:57Z",
+  "name": "Sudan Displacement Crisis",
+  "provenance": {
+    "history": [
+      {
+        "at": "2026-07-01T15:55:57Z",
+        "layer": "verify",
+        "run_id": "2026-07-01T15-55-57Z-d920d6"
+      }
+    ],
+    "last_layer": "verify",
+    "last_run_id": "2026-07-01T15-55-57Z-d920d6"
+  },
+  "schema_version": "1.0",
+  "sort_keys": {
+    "composite": 7386254.0,
+    "impact_rank": 4,
+    "recency_rank": 738625
+  },
+  "verification": {
+    "confidence": "high",
+    "notes": "gate: 2 verified, 0 disputed, 0 unverified -> verified",
+    "status": "verified"
+  }
+}

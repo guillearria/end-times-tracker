@@ -14,8 +14,14 @@ DATA_DIR = ROOT / "data"
 THREATS_DIR = DATA_DIR / "threats"
 QUARANTINE_DIR = DATA_DIR / "quarantine"
 SCHEMA_PATH = DATA_DIR / "schema" / "threat.schema.json"
+# World Pulse events reuse the same trust spine as threats but live in their own
+# dirs and schema (a dated occurrence, not a standing risk). See event.schema.json.
+EVENTS_DIR = DATA_DIR / "events"
+QUARANTINE_EVENTS_DIR = DATA_DIR / "quarantine-events"
+EVENT_SCHEMA_PATH = DATA_DIR / "schema" / "event.schema.json"
 PROMPTS_DIR = ROOT / "pipeline" / "prompts"
 FRONTEND_DATA = ROOT / "frontend" / "data" / "threats.json"
+FRONTEND_EVENTS_DATA = ROOT / "frontend" / "data" / "events.json"
 CHANGELOG_PATH = ROOT / "CHANGELOG.md"
 FIXTURES_DIR = ROOT / "tests" / "fixtures"
 
@@ -90,6 +96,12 @@ SOURCE_ALLOWLIST: dict[str, str] = {
 # Severity / probability -> integer rank, used by the Optimize layer.
 SEVERITY_RANK = {"regional": 1, "continental": 2, "civilizational": 3, "extinction": 4}
 PROBABILITY_RANK = {"very-low": 1, "low": 2, "medium": 3, "high": 4, "very-high": 5}
+
+# Event impact -> rank (1-4), used to break same-day ties in the World Pulse.
+# Deaths and displaced are both considered; the larger signal decides. Ordered
+# high-to-low so the first matching threshold wins. Below the smallest -> rank 1.
+EVENT_IMPACT_DEATHS = [(1000, 4), (100, 3), (10, 2)]
+EVENT_IMPACT_DISPLACED = [(1_000_000, 4), (100_000, 3), (10_000, 2)]
 
 # --- Pricing (USD) ---------------------------------------------------------
 # Per-million-token list prices (input, output). Source: Anthropic pricing,

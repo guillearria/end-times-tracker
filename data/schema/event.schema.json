@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://end-times-tracker/event.schema.json",
+  "title": "Event",
+  "description": "One confirmed, currently-relevant major world event (a disaster, outbreak, or crisis). Shares the claims/verification/provenance trust spine with the Threat schema; only the domain block and sort_keys differ. Deliberately flat and free of pattern/min/max keywords so this exact schema can double as a Claude structured-output format; slug and range checks live in Python.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "category",
+    "description",
+    "event",
+    "claims",
+    "verification",
+    "provenance",
+    "last_updated",
+    "sort_keys"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "id": {
+      "type": "string",
+      "description": "Stable slug, equals the filename without .json. Must match ^[a-z0-9-]+$ (enforced in Python)."
+    },
+    "name": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": [
+        "earthquake",
+        "storm",
+        "flood",
+        "wildfire",
+        "volcanic",
+        "drought",
+        "outbreak",
+        "conflict",
+        "humanitarian",
+        "economic",
+        "industrial",
+        "other"
+      ]
+    },
+    "description": { "type": "string" },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "occurrence_date",
+        "location",
+        "status",
+        "scale",
+        "magnitude",
+        "impact",
+        "live_source_url"
+      ],
+      "properties": {
+        "occurrence_date": {
+          "type": "string",
+          "description": "ISO-8601 date (YYYY-MM-DD) the event began. Drives recency ordering."
+        },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["country", "region", "lat", "lon"],
+          "properties": {
+            "country": { "type": "string" },
+            "region": { "type": "string" },
+            "lat": { "type": ["number", "null"] },
+            "lon": { "type": ["number", "null"] }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["ongoing", "contained", "resolved"]
+        },
+        "scale": {
+          "type": "string",
+          "description": "Human-readable magnitude/scale, e.g. \"M6.3\", \"Category 4\", \"PHEIC\"."
+        },
+        "magnitude": {
+          "type": ["number", "null"],
+          "description": "Optional numeric magnitude (quake mag, storm category) when one exists."
+        },
+        "impact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["deaths", "displaced", "summary"],
+          "properties": {
+            "deaths": { "type": ["number", "null"] },
+            "displaced": { "type": ["number", "null"] },
+            "summary": {
+              "type": "string",
+              "description": "Cached snapshot of impact. Figures are as of the claims' retrieved_date; the live source keeps the authoritative running total."
+            }
+          }
+        },
+        "live_source_url": {
+          "type": "string",
+          "description": "Authoritative live page that keeps updating (may be empty). Allowlist-checked for the 'live source' badge."
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text",
+          "source_name",
+          "source_url",
+          "retrieved_date",
+          "verification_status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable per-event id, e.g. claim-1. Lets re-verification diff in place."
+          },
+          "text": { "type": "string" },
+          "source_name": { "type": "string" },
+          "source_url": {
+            "type": "string",
+            "description": "Empty string until grounded. Only the gate normalizes source_name from this."
+          },
+          "retrieved_date": {
+            "type": "string",
+            "description": "ISO-8601 date the source was last retrieved, or empty string if never."
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": ["verified", "unverified", "disputed"]
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "confidence", "notes"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["verified", "partial", "quarantined", "unverified"]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["last_layer", "last_run_id", "history"],
+      "properties": {
+        "last_layer": {
+          "type": "string",
+          "enum": ["generate", "verify", "cleanup", "optimize"]
+        },
+        "last_run_id": { "type": "string" },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["layer", "run_id", "at"],
+            "properties": {
+              "layer": {
+                "type": "string",
+                "enum": ["generate", "verify", "cleanup", "optimize"]
+              },
+              "run_id": { "type": "string" },
+              "at": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "last_updated": { "type": "string" },
+    "sort_keys": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recency_rank", "impact_rank", "composite"],
+      "properties": {
+        "recency_rank": {
+          "type": "integer",
+          "description": "Ordinal day number of occurrence_date (date.toordinal); larger = more recent. Range checked in Python."
+        },
+        "impact_rank": {
+          "type": "integer",
+          "description": "1-4 from casualty/displacement bands; range enforced in Python."
+        },
+        "composite": {
+          "type": "number",
+          "description": "recency_rank*10 + impact_rank. Recency dominates; impact breaks same-day ties."
+        }
+      }
+    }
+  }
+}

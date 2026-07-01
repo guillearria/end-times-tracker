@@ -13,11 +13,15 @@ import json
 from . import config, store
 
 
-def build() -> dict:
-    published = [store.load(p) for p in sorted(config.THREATS_DIR.glob("*.json"))]
+def _aggregate(published_dir, quarantine_dir, out_path) -> dict:
+    published = (
+        [store.load(p) for p in sorted(published_dir.glob("*.json"))]
+        if published_dir.exists()
+        else []
+    )
     under_review = (
-        [store.load(p) for p in sorted(config.QUARANTINE_DIR.glob("*.json"))]
-        if config.QUARANTINE_DIR.exists()
+        [store.load(p) for p in sorted(quarantine_dir.glob("*.json"))]
+        if quarantine_dir.exists()
         else []
     )
     last_updated = max((r.get("last_updated", "") for r in published + under_review), default="")
@@ -26,9 +30,19 @@ def build() -> dict:
         "published": published,
         "under_review": under_review,
     }
-    config.FRONTEND_DATA.parent.mkdir(parents=True, exist_ok=True)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     store.write_atomic(
-        config.FRONTEND_DATA,
+        out_path,
         json.dumps(doc, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
     )
     return doc
+
+
+def build() -> dict:
+    """Aggregate threats -> frontend/data/threats.json."""
+    return _aggregate(config.THREATS_DIR, config.QUARANTINE_DIR, config.FRONTEND_DATA)
+
+
+def build_events() -> dict:
+    """Aggregate World Pulse events -> frontend/data/events.json."""
+    return _aggregate(config.EVENTS_DIR, config.QUARANTINE_EVENTS_DIR, config.FRONTEND_EVENTS_DATA)

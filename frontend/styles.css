@@ -28,16 +28,22 @@ body {
   padding: 0 20px;
 }
 
-.site-header { padding-top: 40px; padding-bottom: 16px; }
+.site-header { padding-top: 40px; padding-bottom: 8px; }
 .site-header h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
-.tagline { color: var(--muted); margin: 0 0 8px; max-width: 70ch; }
-.freshness { color: var(--muted); font-size: 0.85rem; margin: 0; }
+.tagline { color: var(--muted); margin: 0 0 8px; max-width: 74ch; }
+.freshness { color: var(--muted); font-size: 0.85rem; margin: 6px 0 0; }
 
 .loading { color: var(--muted); }
 
-.category { margin: 32px 0 8px; }
-.category h2 {
-  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+/* Two co-equal panes: World Pulse (events) and Existential Threats. */
+.pane { margin-top: 36px; }
+.pane-head { border-bottom: 2px solid var(--line); padding-bottom: 10px; margin-bottom: 18px; }
+.pane-title { font-size: 1.5rem; margin: 0; letter-spacing: -0.01em; }
+.pane-sub { color: var(--muted); margin: 4px 0 0; }
+
+.category { margin: 24px 0 8px; }
+.category-title {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
   color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 6px; margin: 0 0 14px;
 }
 
@@ -50,8 +56,12 @@ body {
 }
 .card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
 .card-head h3 { margin: 0; font-size: 1.15rem; }
-.card-summary { color: var(--text); margin: 10px 0 12px; }
+.card-summary { color: var(--text); margin: 10px 0 10px; }
 .card-meta { color: var(--muted); font-size: 0.8rem; margin-top: 10px; }
+.card-loc { color: var(--text); font-size: 0.85rem; margin: 0 0 4px; font-weight: 500; }
+.card-live { color: var(--muted); font-size: 0.82rem; margin: 0 0 4px; }
+.card-live a { color: var(--accent); text-decoration: none; }
+.card-live a:hover { text-decoration: underline; }
 
 .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
 .badge {
@@ -64,8 +74,12 @@ body {
 .badge-unverified { color: var(--text); background: var(--panel-2); border-color: var(--grey); }
 .badge-disputed { color: #0f1115; background: var(--red); border-color: var(--red); }
 .badge-review   { color: #0f1115; background: var(--amber); border-color: var(--amber); }
-.badge-sev, .badge-prob { background: var(--panel-2); }
+.badge-sev, .badge-prob, .badge-scale { background: var(--panel-2); }
 .badge-conf { background: transparent; }
+/* Event status badges. */
+.badge-ongoing   { color: #0f1115; background: var(--red); border-color: var(--red); }
+.badge-contained { color: #0f1115; background: var(--amber); border-color: var(--amber); }
+.badge-resolved  { color: #0f1115; background: var(--green); border-color: var(--green); }
 
 details.claims { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
 details.claims summary { cursor: pointer; color: var(--accent); font-size: 0.9rem; }

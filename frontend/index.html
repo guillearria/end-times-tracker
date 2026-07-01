@@ -3,24 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>End Times Tracker</title>
-  <meta name="description" content="A fact-based tracker of possible threats to humanity. An aggregation of authoritative figures, not a forecast." />
+  <title>World Watch</title>
+  <meta name="description" content="A fact-based watch on the world: a live pulse of confirmed major events plus an ongoing tracker of existential threats. Every published figure is grounded in an authoritative source — an aggregation, not a forecast." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <h1>End&nbsp;Times&nbsp;Tracker</h1>
-    <p class="tagline">A fact-based aggregation of possible threats to humanity — every published figure is grounded in an authoritative source. <strong>This is an aggregation of published figures, not a forecast.</strong></p>
-    <p class="freshness" id="freshness"></p>
+    <h1>World&nbsp;Watch</h1>
+    <p class="tagline">A fact-based watch on the world — a live <strong>pulse of confirmed major events</strong> alongside an ongoing tracker of <strong>existential threats</strong>. Every published figure is grounded in an authoritative source. <strong>This is an aggregation of published figures, not a forecast.</strong></p>
   </header>
 
-  <main id="app">
-    <p class="loading">Loading threats…</p>
+  <main>
+    <section class="pane" id="pulse-pane">
+      <div class="pane-head">
+        <h2 class="pane-title">World Pulse</h2>
+        <p class="pane-sub">Confirmed major events happening now — disasters, outbreaks, and crises, newest first.</p>
+        <p class="freshness" id="pulse-freshness"></p>
+      </div>
+      <div id="pulse"><p class="loading">Loading events…</p></div>
+    </section>
+
+    <section class="pane" id="threats-pane">
+      <div class="pane-head">
+        <h2 class="pane-title">Existential Threats</h2>
+        <p class="pane-sub">The End-Times tracker — standing risks to humanity, by category.</p>
+        <p class="freshness" id="threats-freshness"></p>
+      </div>
+      <div id="threats"><p class="loading">Loading threats…</p></div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <p>Every claim links its source. <span class="badge badge-verified">verified</span> claims are grounded on an authoritative allowlisted domain; threats that fail verification appear under <span class="badge badge-review">under review</span> and are never presented as confirmed.</p>
-    <p>Open source. The dataset is rebuilt and re-published on every pipeline run.</p>
+    <p>Every claim links its source. <span class="badge badge-verified">verified</span> claims are grounded on an authoritative allowlisted domain; records that fail verification appear under <span class="badge badge-review">under review</span> and are never presented as confirmed.</p>
+    <p>Event figures are a cached snapshot as of the retrieval date — the linked live source keeps the authoritative running total. Open source; the dataset is rebuilt and re-published on every refresh.</p>
   </footer>
 
   <script src="./app.js"></script>

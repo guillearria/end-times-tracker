@@ -1,0 +1,65 @@
+{
+  "category": "outbreak",
+  "claims": [
+    {
+      "id": "claim-1",
+      "retrieved_date": "2026-07-01",
+      "source_name": "WHO",
+      "source_url": "https://www.who.int/news/item/17-05-2026-epidemic-of-ebola-disease-in-the-democratic-republic-of-the-congo-and-uganda-determined-a-public-health-emergency-of-international-concern",
+      "text": "On 17 May 2026 the WHO Director-General determined that the epidemic of Ebola disease caused by Bundibugyo virus in the DRC and Uganda constitutes a Public Health Emergency of International Concern (PHEIC).",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-2",
+      "retrieved_date": "2026-07-01",
+      "source_name": "WHO",
+      "source_url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON608",
+      "text": "As of 17 June 2026, the Democratic Republic of the Congo had reported 896 confirmed cases of Bundibugyo virus disease including 232 deaths.",
+      "verification_status": "verified"
+    }
+  ],
+  "description": "The Democratic Republic of the Congo declared its 17th Ebola outbreak — caused by Bundibugyo virus — on 15 May 2026, centred in Ituri Province. On 17 May 2026 the WHO Director-General declared the DRC and Uganda epidemic a Public Health Emergency of International Concern (PHEIC).",
+  "event": {
+    "impact": {
+      "deaths": 234,
+      "displaced": null,
+      "summary": "As of 17 June 2026 the DRC had reported 896 confirmed cases including 232 deaths; Uganda reported 19 confirmed cases and two deaths (as of 18 June 2026), with no new cases there since 5 June 2026."
+    },
+    "live_source_url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
+    "location": {
+      "country": "Democratic Republic of the Congo",
+      "lat": null,
+      "lon": null,
+      "region": "Ituri Province (Mongbwalu), DRC, with cases in Uganda"
+    },
+    "magnitude": null,
+    "occurrence_date": "2026-05-15",
+    "scale": "PHEIC",
+    "status": "ongoing"
+  },
+  "id": "ebola-bundibugyo-drc-2026",
+  "last_updated": "2026-07-01T15:55:57Z",
+  "name": "Ebola (Bundibugyo virus) — DR Congo & Uganda",
+  "provenance": {
+    "history": [
+      {
+        "at": "2026-07-01T15:55:57Z",
+        "layer": "verify",
+        "run_id": "2026-07-01T15-55-57Z-c7dd3c"
+      }
+    ],
+    "last_layer": "verify",
+    "last_run_id": "2026-07-01T15-55-57Z-c7dd3c"
+  },
+  "schema_version": "1.0",
+  "sort_keys": {
+    "composite": 7397513.0,
+    "impact_rank": 3,
+    "recency_rank": 739751
+  },
+  "verification": {
+    "confidence": "high",
+    "notes": "gate: 2 verified, 0 disputed, 0 unverified -> verified",
+    "status": "verified"
+  }
+}
