@@ -1,0 +1,65 @@
+{
+  "assessment": {
+    "probability": {
+      "estimate": "low",
+      "numeric_annual": null,
+      "window": "next-50-years"
+    },
+    "severity": "civilizational",
+    "summary": "Thousands of warheads remain in military stockpiles — thousands deployed, and roughly two thousand on high alert — making nuclear war a persistent, low-probability, civilization-scale risk.",
+    "timeframe": "No reliable forecast; risk tracks geopolitical crises, arsenal modernization, and the erosion or renewal of arms-control agreements."
+  },
+  "category": "nuclear",
+  "claims": [
+    {
+      "id": "claim-1",
+      "retrieved_date": "2026-07-02",
+      "source_name": "SIPRI",
+      "source_url": "https://www.sipri.org/media/press-release/2026/increasing-focus-nuclear-weapons-amid-heightened-escalation-risks-new-sipri-yearbook-out-now",
+      "text": "SIPRI estimates a total global inventory of 12,187 nuclear warheads in January 2026, of which about 9,745 were in military stockpiles for potential use.",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-2",
+      "retrieved_date": "2026-07-02",
+      "source_name": "SIPRI",
+      "source_url": "https://www.sipri.org/media/press-release/2026/increasing-focus-nuclear-weapons-amid-heightened-escalation-risks-new-sipri-yearbook-out-now",
+      "text": "An estimated 4,012 warheads were deployed with missiles and aircraft in January 2026, and between 2,100 and 2,200 of the deployed warheads were kept in a state of high operational alert on ballistic missiles.",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-3",
+      "retrieved_date": "2026-07-02",
+      "source_name": "SIPRI",
+      "source_url": "https://www.sipri.org/media/press-release/2026/increasing-focus-nuclear-weapons-amid-heightened-escalation-risks-new-sipri-yearbook-out-now",
+      "text": "Nine states possess nuclear weapons: the United States, Russia, the United Kingdom, France, China, India, Pakistan, North Korea and Israel.",
+      "verification_status": "verified"
+    }
+  ],
+  "description": "A deliberate or inadvertent nuclear exchange between states. Global arsenals remain in the thousands of warheads, all nine nuclear-armed states are modernizing their forces, and hundreds of weapons are kept on high operational alert — keeping a civilization-scale exchange a persistent possibility even at low annual probability.",
+  "id": "nuclear-war",
+  "last_updated": "2026-07-02T13:29:52Z",
+  "name": "Nuclear War",
+  "provenance": {
+    "history": [
+      {
+        "at": "2026-07-02T13:29:52Z",
+        "layer": "verify",
+        "run_id": "2026-07-02T13-29-52Z-e804f8"
+      }
+    ],
+    "last_layer": "verify",
+    "last_run_id": "2026-07-02T13-29-52Z-e804f8"
+  },
+  "schema_version": "1.0",
+  "sort_keys": {
+    "composite": 32.0,
+    "probability_rank": 2,
+    "severity_rank": 3
+  },
+  "verification": {
+    "confidence": "high",
+    "notes": "gate: 3 verified, 0 disputed, 0 unverified -> verified",
+    "status": "verified"
+  }
+}
