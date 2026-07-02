@@ -28,7 +28,9 @@ no Anthropic API credits. In a Claude Code session run:
 ```
 
 `/refresh-events` researches confirmed major world events with web search, drafts cited claims, runs
-them through the deterministic gate, rebuilds the frontend, and **commits + pushes directly** — there's
+them through the deterministic gate, rebuilds the frontend, and **auto-publishes with no PR** (in a
+cloud session the push lands on a `claude/*` branch and the `publish-events` workflow re-validates
+and merges it into `main`) — there's
 no human in a daily unattended loop, so auto-publish via the trust gate is the explicit design (see
 [`.claude/commands/refresh-events.md`](.claude/commands/refresh-events.md)). `/refresh-threats` does
 the same for standing threats but opens a PR instead, since it's weekly and human-reviewed (see

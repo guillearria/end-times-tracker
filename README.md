@@ -22,8 +22,10 @@ publishes, never the model's say-so — but differ in cadence and publish model,
 
 - **World Pulse (events)** — `data/events/*.json`, validated against `data/schema/event.schema.json`.
   Cadence: **daily**. Curated via `/refresh-events` (`.claude/commands/refresh-events.md`) or
-  `scripts/author_event.py`. **Auto-published** straight through the gate with no PR — a daily
-  unattended refresh has no one to review one, so the gate alone decides verified vs. quarantined.
+  `scripts/author_event.py`. **Auto-published** through the gate with no PR — a daily unattended
+  refresh has no one to review one, so the gate alone decides verified vs. quarantined. (Cloud
+  sessions can only push to their own branch, so the `publish-events` workflow re-validates the
+  branch, checks it touches only events data, and merges it into `main`.)
 - **Existential Threats** — `data/threats/*.json`, validated against `data/schema/threat.schema.json`.
   Cadence: **weekly** (standing risks don't move day to day). Curated via `/refresh-threats` or
   `scripts/author_threat.py`. Updates land via a **human-reviewed PR** — see the `/refresh-threats`

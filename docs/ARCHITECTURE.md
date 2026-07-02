@@ -72,7 +72,8 @@ research (WebSearch/WebFetch against allowlisted sources)
        = writes to the published or quarantine dir by gate result
   -> scripts/validate_data.py && scripts/build_frontend.py && pytest
   -> pipeline/changelog.regenerate()
-  -> events: commit + push to main | threats: open a PR
+  -> events: commit + push (a cloud session's push lands on its claude/* branch; the
+     publish-events workflow re-validates scope + schema, then merges to main) | threats: open a PR
 ```
 
 Hand-authoring follows the same path (see CONTRIBUTING.md). There is no other write path — nothing
@@ -110,6 +111,10 @@ banner** appears when `last_updated` exceeds 2 days (events) or 10 days (threats
   frontend build.
 - **`pages.yml`** — on push to `main` touching `frontend/**`: rebuilds the aggregates and deploys
   `frontend/` to GitHub Pages.
+- **`publish-events.yml`** — the auto-publish bridge: when a cloud session pushes a `claude/*`
+  branch, it merges to `main` only if the branch touches nothing but events data + the aggregate +
+  CHANGELOG and passes schema validation with a byte-exact aggregate. Threats branches are skipped
+  (they go through PR review). This enforces the refresh commands' write-scope rule mechanically.
 - **`staleness.yml`** — daily scheduled check that fails loudly (GitHub notification) if the
   committed `frontend/data/*.json` goes stale (>2 days events / >10 days threats) — the server-side
   complement to the frontend banner, catching a silently-dead refresh schedule.
