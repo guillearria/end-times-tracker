@@ -2,6 +2,10 @@
 
 _Generated from git history over `data/threats/`, `data/quarantine/`, `data/events/`, and `data/quarantine-events/` by `pipeline.changelog`. Do not edit by hand._
 
+## 2026-07-02 — Seed resource and societal threats: food/water insecurity, forced displacement (`c709504`)
+
+- **Added:** global-food-water-insecurity, global-forced-displacement
+
 ## 2026-07-01 — Phase 2: refresh-events command, staleness banner, allowlist expansion (`a829e74`)
 
 - **Updated:** venezuela-earthquake-2026
