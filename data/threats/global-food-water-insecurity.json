@@ -1,0 +1,81 @@
+{
+  "assessment": {
+    "probability": {
+      "estimate": "high",
+      "numeric_annual": null,
+      "window": "ongoing"
+    },
+    "severity": "continental",
+    "summary": "A present, quantified global strain — hundreds of millions hungry, billions water-insecure — whose escalation pathways run through climate extremes and conflict.",
+    "timeframe": "Chronic and ongoing; acute regional food crises recur annually, and climate change intensifies water stress through mid-century."
+  },
+  "category": "resource",
+  "claims": [
+    {
+      "id": "claim-1",
+      "retrieved_date": "2026-07-02",
+      "source_name": "FAO",
+      "source_url": "https://www.fao.org/newsroom/detail/global-hunger-declines--but-rises-in-africa-and-western-asia--un-report/en",
+      "text": "An estimated 8.2 percent of the global population, about 673 million people, experienced hunger in 2024 (FAO, The State of Food Security and Nutrition in the World 2025).",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-2",
+      "retrieved_date": "2026-07-02",
+      "source_name": "FAO",
+      "source_url": "https://www.fao.org/newsroom/detail/global-hunger-declines--but-rises-in-africa-and-western-asia--un-report/en",
+      "text": "The global prevalence of moderate or severe food insecurity was 28.0 percent in 2024, accounting for 2.3 billion people (FAO SOFI 2025).",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-3",
+      "retrieved_date": "2026-07-02",
+      "source_name": "UN World Food Programme",
+      "source_url": "https://www.wfp.org/global-hunger-crisis",
+      "text": "266 million people are facing crisis levels of hunger or worse, according to the Global Report on Food Crises.",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-4",
+      "retrieved_date": "2026-07-02",
+      "source_name": "UNESCO",
+      "source_url": "https://www.unesco.org/reports/wwdr/en/2024/s",
+      "text": "Roughly half of the world's population experiences severe water scarcity for at least part of the year (UN World Water Development Report 2024).",
+      "verification_status": "verified"
+    },
+    {
+      "id": "claim-5",
+      "retrieved_date": "2026-07-02",
+      "source_name": "UNESCO",
+      "source_url": "https://www.unesco.org/reports/wwdr/en/2024/s",
+      "text": "As of 2022, 2.2 billion people were without access to safely managed drinking water (UN World Water Development Report 2024).",
+      "verification_status": "verified"
+    }
+  ],
+  "description": "A chronic global shortfall in access to adequate food and safe freshwater, driven by conflict, economic shocks, and climate extremes. Hundreds of millions face hunger and billions face water scarcity today; the tail risk is cascading food-system and water-supply failures that destabilize whole regions.",
+  "id": "global-food-water-insecurity",
+  "last_updated": "2026-07-02T13:24:24Z",
+  "name": "Global Food and Water Insecurity",
+  "provenance": {
+    "history": [
+      {
+        "at": "2026-07-02T13:24:24Z",
+        "layer": "verify",
+        "run_id": "2026-07-02T13-24-24Z-ef6b13"
+      }
+    ],
+    "last_layer": "verify",
+    "last_run_id": "2026-07-02T13-24-24Z-ef6b13"
+  },
+  "schema_version": "1.0",
+  "sort_keys": {
+    "composite": 24.0,
+    "probability_rank": 4,
+    "severity_rank": 2
+  },
+  "verification": {
+    "confidence": "high",
+    "notes": "gate: 5 verified, 0 disputed, 0 unverified -> verified",
+    "status": "verified"
+  }
+}
