@@ -1,6 +1,160 @@
 {
-  "last_updated": "2026-06-29T00:00:00Z",
+  "last_updated": "2026-07-02T13:24:25Z",
   "published": [
+    {
+      "assessment": {
+        "probability": {
+          "estimate": "high",
+          "numeric_annual": null,
+          "window": "ongoing"
+        },
+        "severity": "continental",
+        "summary": "A present, quantified global strain — hundreds of millions hungry, billions water-insecure — whose escalation pathways run through climate extremes and conflict.",
+        "timeframe": "Chronic and ongoing; acute regional food crises recur annually, and climate change intensifies water stress through mid-century."
+      },
+      "category": "resource",
+      "claims": [
+        {
+          "id": "claim-1",
+          "retrieved_date": "2026-07-02",
+          "source_name": "FAO",
+          "source_url": "https://www.fao.org/newsroom/detail/global-hunger-declines--but-rises-in-africa-and-western-asia--un-report/en",
+          "text": "An estimated 8.2 percent of the global population, about 673 million people, experienced hunger in 2024 (FAO, The State of Food Security and Nutrition in the World 2025).",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-2",
+          "retrieved_date": "2026-07-02",
+          "source_name": "FAO",
+          "source_url": "https://www.fao.org/newsroom/detail/global-hunger-declines--but-rises-in-africa-and-western-asia--un-report/en",
+          "text": "The global prevalence of moderate or severe food insecurity was 28.0 percent in 2024, accounting for 2.3 billion people (FAO SOFI 2025).",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-3",
+          "retrieved_date": "2026-07-02",
+          "source_name": "UN World Food Programme",
+          "source_url": "https://www.wfp.org/global-hunger-crisis",
+          "text": "266 million people are facing crisis levels of hunger or worse, according to the Global Report on Food Crises.",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-4",
+          "retrieved_date": "2026-07-02",
+          "source_name": "UNESCO",
+          "source_url": "https://www.unesco.org/reports/wwdr/en/2024/s",
+          "text": "Roughly half of the world's population experiences severe water scarcity for at least part of the year (UN World Water Development Report 2024).",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-5",
+          "retrieved_date": "2026-07-02",
+          "source_name": "UNESCO",
+          "source_url": "https://www.unesco.org/reports/wwdr/en/2024/s",
+          "text": "As of 2022, 2.2 billion people were without access to safely managed drinking water (UN World Water Development Report 2024).",
+          "verification_status": "verified"
+        }
+      ],
+      "description": "A chronic global shortfall in access to adequate food and safe freshwater, driven by conflict, economic shocks, and climate extremes. Hundreds of millions face hunger and billions face water scarcity today; the tail risk is cascading food-system and water-supply failures that destabilize whole regions.",
+      "id": "global-food-water-insecurity",
+      "last_updated": "2026-07-02T13:24:24Z",
+      "name": "Global Food and Water Insecurity",
+      "provenance": {
+        "history": [
+          {
+            "at": "2026-07-02T13:24:24Z",
+            "layer": "verify",
+            "run_id": "2026-07-02T13-24-24Z-ef6b13"
+          }
+        ],
+        "last_layer": "verify",
+        "last_run_id": "2026-07-02T13-24-24Z-ef6b13"
+      },
+      "schema_version": "1.0",
+      "sort_keys": {
+        "composite": 24.0,
+        "probability_rank": 4,
+        "severity_rank": 2
+      },
+      "verification": {
+        "confidence": "high",
+        "notes": "gate: 5 verified, 0 disputed, 0 unverified -> verified",
+        "status": "verified"
+      }
+    },
+    {
+      "assessment": {
+        "probability": {
+          "estimate": "high",
+          "numeric_annual": null,
+          "window": "ongoing"
+        },
+        "severity": "continental",
+        "summary": "Over a hundred million people remain forcibly displaced worldwide — a standing stress on regional stability and the international protection system.",
+        "timeframe": "Ongoing at historic scale; direction depends on active conflicts, with returns in 2025 producing the first decline in ten years."
+      },
+      "category": "societal",
+      "claims": [
+        {
+          "id": "claim-1",
+          "retrieved_date": "2026-07-02",
+          "source_name": "UNHCR",
+          "source_url": "https://www.unhcr.org/global-trends",
+          "text": "At the end of 2025, 117.8 million people worldwide were forcibly displaced — roughly one in every 70 people (UNHCR Global Trends, June 2026).",
+          "verification_status": "unverified"
+        },
+        {
+          "id": "claim-2",
+          "retrieved_date": "2026-07-02",
+          "source_name": "United Nations",
+          "source_url": "https://news.un.org/en/story/2026/06/1167693",
+          "text": "Global refugee numbers fell by three per cent in 2025 to 41.6 million.",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-3",
+          "retrieved_date": "2026-07-02",
+          "source_name": "United Nations",
+          "source_url": "https://news.un.org/en/story/2026/06/1167693",
+          "text": "14.7 million displaced people went back to their areas or countries of origin in 2025, including 4.4 million refugees and 10.3 million internally displaced people.",
+          "verification_status": "verified"
+        },
+        {
+          "id": "claim-4",
+          "retrieved_date": "2026-07-02",
+          "source_name": "United Nations",
+          "source_url": "https://media.un.org/unifeed/en/asset/d358/d3585989",
+          "text": "70 per cent of refugees are living in protracted, long-term displacement situations (UNHCR Global Trends briefing, June 2026).",
+          "verification_status": "verified"
+        }
+      ],
+      "description": "Displacement by persecution, conflict, violence, and human-rights violations at near-record scale. Sustained mass displacement strains host states and international institutions, and is both a symptom and an amplifier of instability; 2025 saw the first decline in a decade, driven by large-scale returns.",
+      "id": "global-forced-displacement",
+      "last_updated": "2026-07-02T13:24:25Z",
+      "name": "Global Forced Displacement Crisis",
+      "provenance": {
+        "history": [
+          {
+            "at": "2026-07-02T13:24:25Z",
+            "layer": "verify",
+            "run_id": "2026-07-02T13-24-25Z-af7543"
+          }
+        ],
+        "last_layer": "verify",
+        "last_run_id": "2026-07-02T13-24-25Z-af7543"
+      },
+      "schema_version": "1.0",
+      "sort_keys": {
+        "composite": 24.0,
+        "probability_rank": 4,
+        "severity_rank": 2
+      },
+      "verification": {
+        "confidence": "medium",
+        "notes": "gate: 3 verified, 0 disputed, 1 unverified -> partial",
+        "status": "partial"
+      }
+    },
     {
       "assessment": {
         "probability": {
