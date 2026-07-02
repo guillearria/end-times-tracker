@@ -8,54 +8,9 @@ before and after — Optimize can never alter a claim or a source_url.
 from __future__ import annotations
 
 import json
-from datetime import date
 
 from .. import client, config, models, schema
-
-
-def compute_sort_keys(record: dict, kind: str = "threat") -> dict:
-    if kind == "event":
-        return _event_sort_keys(record)
-    a = record.get("assessment", {})
-    sr = config.SEVERITY_RANK.get(a.get("severity"), 1)
-    pr = config.PROBABILITY_RANK.get(a.get("probability", {}).get("estimate"), 1)
-    # Severity dominates; probability breaks ties.
-    return {"severity_rank": sr, "probability_rank": pr, "composite": float(sr * 10 + pr)}
-
-
-def _recency_rank(occurrence_date: str) -> int:
-    """Ordinal day number of the occurrence date; larger = more recent.
-
-    Uses date.toordinal so the rank is stable (independent of 'today') — a rebuild
-    next month yields the same file, yet newer events always outrank older ones.
-    """
-    try:
-        return date.fromisoformat((occurrence_date or "")[:10]).toordinal()
-    except ValueError:
-        return 0
-
-
-def _impact_rank(impact: dict) -> int:
-    """1-4 from casualty/displacement bands; the larger signal wins (see config)."""
-    rank = 1
-    deaths = impact.get("deaths")
-    displaced = impact.get("displaced")
-    for value, bands in ((deaths, config.EVENT_IMPACT_DEATHS),
-                         (displaced, config.EVENT_IMPACT_DISPLACED)):
-        if isinstance(value, (int, float)):
-            for threshold, r in bands:
-                if value >= threshold:
-                    rank = max(rank, r)
-                    break
-    return rank
-
-
-def _event_sort_keys(record: dict) -> dict:
-    ev = record.get("event", {})
-    recency = _recency_rank(ev.get("occurrence_date", ""))
-    impact = _impact_rank(ev.get("impact", {}))
-    # Recency dominates (day-ordinal * 10 dwarfs the 1-4 impact); impact breaks same-day ties.
-    return {"recency_rank": recency, "impact_rank": impact, "composite": float(recency * 10 + impact)}
+from ..curate import compute_sort_keys
 
 
 def _live_prose(record: dict, *, client_obj) -> dict:
