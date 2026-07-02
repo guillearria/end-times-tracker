@@ -1,0 +1,40 @@
+# Fails loudly (GitHub notification to the last committer) when the committed
+# aggregates go stale — the server-side complement to the frontend banner, so a
+# silently-dead refresh schedule triggers an email instead of waiting for
+# someone to load the page. Thresholds mirror frontend/app.js.
+#
+# Accepted limits:
+# - GitHub auto-disables schedules after ~60 days of repo inactivity; the daily
+#   refresh commits keep it alive, and if both die together the frontend banner
+#   still shows.
+# - Rare false positive if the world is quiet for >2 days AND no ongoing event
+#   needed a retrieved_date refresh (a normal refresh re-stamps last_updated).
+name: staleness
+on:
+  schedule:
+    - cron: "0 13 * * *" # daily 13:00 UTC — hours after both refresh routines
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if published data is stale
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+          from datetime import datetime, timezone
+          LIMITS = {"frontend/data/events.json": 2, "frontend/data/threats.json": 10}
+          now, errs = datetime.now(timezone.utc), []
+          for path, limit in LIMITS.items():
+              stamp = json.load(open(path)).get("last_updated", "")
+              if not stamp:
+                  errs.append(f"{path}: empty last_updated (no records?)"); continue
+              age = (now - datetime.fromisoformat(stamp.replace("Z", "+00:00"))).total_seconds() / 86400
+              if age > limit:
+                  errs.append(f"{path}: last refreshed {stamp} — {age:.1f} days ago (limit {limit})")
+          print("\n".join(errs) if errs else "fresh")
+          sys.exit(1 if errs else 0)
+          EOF
